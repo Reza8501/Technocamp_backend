@@ -1,0 +1,16 @@
+env:
+  - name: ENVIRONMENT
+    value: "local"
+  - name: PORT
+    value: "8080"
+
+  - name: MYSQL_HOST
+    value: "localhost"
+  - name: MYSQL_PORT
+    value: "3306"
+  - name: MYSQL_USER
+    value: "root"
+  - name: MYSQL_PASS
+    value: "root"
+  - name: MYSQL_SCHEMA
+    value: "ta"
