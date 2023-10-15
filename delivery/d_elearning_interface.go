@@ -9,6 +9,7 @@ import (
 type Delivery interface {
 	Ping(c *gin.Context)
 	NoRoute(c *gin.Context)
+	UpdateCourse(c *gin.Context)
 }
 
 type delivery struct {

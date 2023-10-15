@@ -1,12 +1,18 @@
 package config
 
 import (
+	"errors"
 	"log"
 
 	_ "github.com/apache/calcite-avatica-go/v5"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
+)
+
+var (
+	ErrConnectionLost = errors.New("database connection lost")
+	ErrRecordNotFound = errors.New("record not found")
 )
 
 func ConnectMySQL() (*gorm.DB, error) {

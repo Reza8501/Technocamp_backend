@@ -19,6 +19,7 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 
 	router.NoRoute(d.NoRoute)
 	router.GET("/ping", d.Ping)
+	router.POST("/course/update", d.UpdateCourse)
 
 	return router
 }

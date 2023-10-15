@@ -24,7 +24,7 @@ func main() {
 
 	mysqlConn, errMySQL := config.ConnectMySQL()
 	if errMySQL != nil {
-		log.Printf("error mysql connection: ", errMySQL)
+		log.Panic("error mysql connection: ", errMySQL)
 	}
 	defer mysqlConn.Close()
 
