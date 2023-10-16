@@ -9,7 +9,7 @@ func (repository *repository) UpdateCourse(c context.Context, req dto.ReqUpdateC
 
 	result := repository.mysqlConn.
 		Model(&req).
-		Where("id = ?", req.ID).
+		Where("id = ?", req.Id).
 		Updates(&req)
 
 	if result.Error != nil {

@@ -15,11 +15,15 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	u := usecase.NewUsecase(r)
 	d := delivery.NewDelivery(u)
 
-	router := gin.New()
+	router := gin.Default()
+	course := router.Group("/course")
+
+	course.POST("/get", d.GetCourse)
+	course.POST("/create", d.CreateCourse)
+	course.POST("/update", d.UpdateCourse)
+	course.POST("/delete", d.DeleteCourse)
 
 	router.NoRoute(d.NoRoute)
-	router.GET("/ping", d.Ping)
-	router.POST("/course/update", d.UpdateCourse)
 
 	return router
 }

@@ -9,9 +9,13 @@ import (
 func (r *repository) GetCourse(c context.Context, id []int) ([]entity.Courses, error) {
 
 	var data []entity.Courses
+
 	db := r.mysqlConn.
-		Model(&entity.Courses{}).
-		Where("id IN (?)", id)
+		Model(&entity.Courses{})
+
+	if len(id) > 0 {
+		db = db.Where("id IN (?)", id)
+	}
 
 	err := db.Scan(&data).Error
 

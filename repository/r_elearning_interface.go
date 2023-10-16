@@ -11,9 +11,9 @@ import (
 type Repository interface {
 	Ping() string
 	GetCourse(c context.Context, id []int) ([]entity.Courses, error)
-	CreateCourse(c context.Context, req entity.Courses) error
+	CreateCourse(c context.Context, req dto.ReqCreateCourse) error
 	UpdateCourse(c context.Context, req dto.ReqUpdateCourse) error
-	DeleteCourse(c context.Context, req dto.ReqCourseById) error
+	DeleteCourse(c context.Context, id []int) error
 }
 
 type repository struct {

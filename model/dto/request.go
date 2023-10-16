@@ -1,19 +1,29 @@
 package dto
 
-type PayloadCourse struct {
-	Id []string `json:"id" validate:"omitempty"`
+type ReqCourseById struct {
+	ID []int `json:"id" validate:"omitempty"`
 }
 
-type ReqCourseById struct {
-	ID []int `json:"id"`
+type ReqDeleteCourseById struct {
+	ID []int `json:"id" validate:"required"`
 }
 
 type ReqUpdateCourse struct {
-	ID            int    `json:"id" validate:"required"`
-	CourseTitle   string `json:"course_title" validate:"-"`
-	CourseImage   string `json:"course_image" validate:"-"`
-	CourseContent string `json:"course_content" validate:"-"`
-	IsFree        bool   `json:"is_free" validate:"-"`
-	IsActive      bool   `json:"is_active" validate:"-"`
-	HasBuyer      bool   `json:"has_buyer" validate:"-"`
+	Id            int    `json:"id" gorm:"column:id"`
+	CourseTitle   string `json:"course_title" gorm:"column:course_title"`
+	CourseImage   string `json:"course_image" gorm:"column:course_image"`
+	CourseContent string `json:"course_content" gorm:"column:course_content"`
+	IsFree        bool   `json:"is_free" gorm:"column:is_free"`
+	IsActive      bool   `json:"is_active" gorm:"column:is_active"`
+	HasBuyer      bool   `json:"has_buyer" gorm:"column:has_buyer"`
+}
+
+type ReqCreateCourse struct {
+	Id            int    `json:"id" gorm:"column:id"`
+	CourseTitle   string `json:"course_title" gorm:"column:course_title"`
+	CourseImage   string `json:"course_image" gorm:"column:course_image"`
+	CourseContent string `json:"course_content" gorm:"column:course_content"`
+	IsFree        bool   `json:"is_free" gorm:"column:is_free"`
+	IsActive      bool   `json:"is_active" gorm:"column:is_active"`
+	HasBuyer      bool   `json:"has_buyer" gorm:"column:has_buyer"`
 }

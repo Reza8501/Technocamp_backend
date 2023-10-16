@@ -2,10 +2,10 @@ package repository
 
 import (
 	"context"
-	"ta-elearning/model/entity"
+	"ta-elearning/model/dto"
 )
 
-func (repository *repository) CreateCourse(c context.Context, req entity.Courses) error {
+func (repository *repository) CreateCourse(c context.Context, req dto.ReqCreateCourse) error {
 
 	err := repository.mysqlConn.
 		Create(&req).Error

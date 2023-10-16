@@ -4,15 +4,15 @@ import (
 	"context"
 	"ta-elearning/model/dto"
 	"ta-elearning/model/dto/response"
-	"ta-elearning/model/entity"
 	"ta-elearning/repository"
 )
 
 type Usecase interface {
 	Ping() string
-	GetCourse(c context.Context, payload dto.ReqCourseById) *response.ResponseContainer
-	CreateCourse(c context.Context, reqData entity.Courses) *response.ResponseContainer
+	GetCourse(c context.Context, req dto.ReqCourseById) *response.ResponseContainer
+	CreateCourse(c context.Context, reqData dto.ReqCreateCourse) *response.ResponseContainer
 	UpdateCourse(c context.Context, req dto.ReqUpdateCourse) *response.ResponseContainer
+	DeleteCourse(c context.Context, req dto.ReqDeleteCourseById) *response.ResponseContainer
 }
 
 type usecase struct {

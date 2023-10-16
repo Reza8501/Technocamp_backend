@@ -9,9 +9,9 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func (u *usecase) GetCourse(c context.Context, payload dto.ReqCourseById) *response.ResponseContainer {
+func (u *usecase) GetCourse(c context.Context, req dto.ReqCourseById) *response.ResponseContainer {
 
-	resultCourse, err := u.Repo.GetCourse(c, payload.ID)
+	resultCourse, err := u.Repo.GetCourse(c, req.ID)
 	if err != nil && err.Error() == config.ErrRecordNotFound.Error() {
 		return response.BuildDataNotFoundResponse()
 	} else if err != nil {
