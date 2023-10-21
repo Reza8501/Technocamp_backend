@@ -17,6 +17,8 @@ env:
   - name: MYSQL_SCHEMA
     value: "ta"
 
+  - name: APP_EMAIL
+    value: "elearning@mail.com"
   - name: SMTP_HOST
     value: "sandbox.smtp.mailtrap.io"
   - name: SMTP_PORT
