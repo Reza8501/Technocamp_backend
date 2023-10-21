@@ -53,8 +53,9 @@ func SendVerificationEmail(email string) error {
 	// build message
 	message := fmt.Sprintf("From: %s\r\n", viper.GetString("APP_EMAIL"))
 	message += fmt.Sprintf("To: %s\r\n", email)
-	message += fmt.Sprintf("Subject: %s\r\n", "Testing")
-	message += fmt.Sprintf("\r\n%s\r\n", "Testing")
+	message += fmt.Sprintf("Subject: %s\r\n", "Verification Account E-Learning")
+	message += fmt.Sprintf("\r\n%s\r\n", "Click this for verification account:")
+	message += fmt.Sprintf("\r\n%s%s\r\n", "http://localhost:8080/users/register/verification?e=", email)
 
 	err := smtp.SendMail(fmt.Sprintf("%s:%s", viper.GetString("SMTP_HOST"), viper.GetString("SMTP_PORT")), auth, viper.GetString("APP_EMAIL"), []string{email}, []byte(message))
 	if err != nil {

@@ -27,6 +27,11 @@ func (u *usecase) Login(c context.Context, request dto.RequestLogin) *response.R
 		return response.BuildUnauthorizedResponse("Invalid Authentication", "Invalid Username or Password")
 	}
 
+	// check status verification
+	if !user.StatusVerification {
+		return response.BuildUnauthorizedResponse("Invalid Authentication", "User not verified")
+	}
+
 	// jwt claims
 	jwtClaims := dto.JwtClaims{
 		RegisteredClaims: jwt.RegisteredClaims{

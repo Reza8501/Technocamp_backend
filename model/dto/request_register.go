@@ -19,6 +19,10 @@ type RequestRegisterUser struct {
 	UpdatedAt time.Time `json:"updatedAt" validate:"omitempty" gorm:"column:updated_at"`
 }
 
+type QueryParamRegisterVerification struct {
+	Email string `form:"e" validate:"required"`
+}
+
 func (request *RequestRegisterUser) TransformRequest() {
 	uuid, errUUID := uuid.NewUUID()
 	if errUUID != nil {
