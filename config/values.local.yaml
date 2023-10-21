@@ -1,4 +1,6 @@
 env:
+  - name: APP_NAME
+    value: "ta-elearning"
   - name: ENVIRONMENT
     value: "local"
   - name: PORT

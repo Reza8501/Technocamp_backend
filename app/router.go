@@ -2,6 +2,7 @@ package app
 
 import (
 	"ta-elearning/delivery"
+	"ta-elearning/middleware"
 	"ta-elearning/repository"
 	"ta-elearning/usecase"
 
@@ -16,12 +17,20 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	d := delivery.NewDelivery(u)
 
 	router := gin.Default()
-	course := router.Group("/course")
 
-	course.POST("/get", d.GetCourse)
-	course.POST("/create", d.CreateCourse)
-	course.POST("/update", d.UpdateCourse)
-	course.POST("/delete", d.DeleteCourse)
+	// authentication segment
+	auth := router.Group("/auth")
+	auth.POST("/login", d.Login)
+
+	// course segment
+	course := router.Group("/course")
+	course.Use(middleware.MiddlewareAuth())
+	{
+		course.POST("/get", d.GetCourse)
+		course.POST("/create", d.CreateCourse)
+		course.POST("/update", d.UpdateCourse)
+		course.POST("/delete", d.DeleteCourse)
+	}
 
 	router.NoRoute(d.NoRoute)
 

@@ -39,5 +39,4 @@ func (d *delivery) DeleteCourse(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
-	return
 }

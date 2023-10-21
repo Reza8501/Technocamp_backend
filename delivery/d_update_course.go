@@ -39,5 +39,4 @@ func (d *delivery) UpdateCourse(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, result)
-	return
 }
