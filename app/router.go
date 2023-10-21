@@ -32,6 +32,10 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 		course.POST("/delete", d.DeleteCourse)
 	}
 
+	// users segment
+	users := router.Group("/users")
+	users.POST("/register", d.RegisterUser)
+
 	router.NoRoute(d.NoRoute)
 
 	return router

@@ -14,6 +14,7 @@ type Delivery interface {
 	UpdateCourse(c *gin.Context)
 	DeleteCourse(c *gin.Context)
 	Login(c *gin.Context)
+	RegisterUser(c *gin.Context)
 }
 
 type delivery struct {

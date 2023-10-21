@@ -15,6 +15,7 @@ type Repository interface {
 	UpdateCourse(c context.Context, req dto.ReqUpdateCourse) error
 	DeleteCourse(c context.Context, id []int) error
 	GetUserByUsername(c context.Context, username string) (*entity.Users, error)
+	RegisterUser(c context.Context, req dto.RequestRegisterUser) error
 }
 
 type repository struct {

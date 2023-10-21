@@ -14,6 +14,7 @@ type Usecase interface {
 	UpdateCourse(c context.Context, req dto.ReqUpdateCourse) *response.ResponseContainer
 	DeleteCourse(c context.Context, req dto.ReqDeleteCourseById) *response.ResponseContainer
 	Login(c context.Context, request dto.RequestLogin) *response.ResponseContainer
+	RegisterUser(c context.Context, req dto.RequestRegisterUser) *response.ResponseContainer
 }
 
 type usecase struct {

@@ -20,3 +20,6 @@ func (ReqCreateCourse) TableName() string {
 func (ReqUpdateCourse) TableName() string {
 	return TABLE_COURSES
 }
+func (RequestRegisterUser) TableName() string {
+	return TABLE_USERS
+}

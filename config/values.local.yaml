@@ -16,3 +16,14 @@ env:
     value: "root"
   - name: MYSQL_SCHEMA
     value: "ta"
+
+  - name: SMTP_HOST
+    value: "sandbox.smtp.mailtrap.io"
+  - name: SMTP_PORT
+    value: "2525"
+  - name: SMTP_USERNAME
+    value: "2e06daf00c9178"
+  - name: SMTP_PASSWORD
+    value: "bc3b1ef8c37d1f"
+
+  
