@@ -36,31 +36,31 @@ func (u *usecase) RegisterUser(c context.Context, req dto.RequestRegisterUser) *
 	}
 
 	go func() {
-		err := SendVerificationEmail(req.Email)
-		if err != nil {
-			log.Print(err.Error())
+		dto.SMTP_AUTH = smtp.PlainAuth("", viper.GetString("SMTP_USERNAME"), viper.GetString("SMTP_PASSWORD"), viper.GetString("SMTP_HOST"))
+		templateData := struct {
+			Name string
+			URL  string
+		}{
+			Name: req.FullName,
+			URL:  fmt.Sprintf("http://localhost:8080/users/register/verification?e=%s", req.Email),
+		}
+
+		r := dto.NewRequestEmail(
+			[]string{req.Email},
+			"Verification Account E-Learning",
+			"",
+		)
+
+		if err := r.ParseTemplate(fmt.Sprintf("%s/verification.html", dto.PATH_TEMPLATE_VERIFICATION_MAIL), templateData); err == nil {
+			if _, errSendMail := r.SendEmail(); errSendMail != nil {
+				log.Print(errSendMail.Error())
+			} else {
+				log.Print("Successfully send verification email")
+			}
 		} else {
-			log.Print("Successfully send verification email")
+			log.Print("Error parsing email template")
 		}
 	}()
 
 	return response.BuildSuccessResponse(nil)
-}
-
-func SendVerificationEmail(email string) error {
-	auth := smtp.PlainAuth("", viper.GetString("SMTP_USERNAME"), viper.GetString("SMTP_PASSWORD"), viper.GetString("SMTP_HOST"))
-
-	// build message
-	message := fmt.Sprintf("From: %s\r\n", viper.GetString("APP_EMAIL"))
-	message += fmt.Sprintf("To: %s\r\n", email)
-	message += fmt.Sprintf("Subject: %s\r\n", "Verification Account E-Learning")
-	message += fmt.Sprintf("\r\n%s\r\n", "Click this for verification account:")
-	message += fmt.Sprintf("\r\n%s%s\r\n", "http://localhost:8080/users/register/verification?e=", email)
-
-	err := smtp.SendMail(fmt.Sprintf("%s:%s", viper.GetString("SMTP_HOST"), viper.GetString("SMTP_PORT")), auth, viper.GetString("APP_EMAIL"), []string{email}, []byte(message))
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
