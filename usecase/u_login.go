@@ -40,6 +40,7 @@ func (u *usecase) Login(c context.Context, request dto.RequestLogin) *response.R
 				Time: time.Now().Add(dto.JWT_EXPIRATION_DURATION),
 			},
 		},
+		Id:       user.Id,
 		Username: user.Username,
 		Email:    user.Email,
 		Role:     user.Role,
