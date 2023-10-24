@@ -10,7 +10,7 @@ import (
 
 func (u *usecase) UpdateCourse(c context.Context, req dto.ReqUpdateCourse) *response.ResponseContainer {
 
-	getById, errGetById := u.Repo.GetCourse(c, []int{req.Id})
+	getById, errGetById := u.Repo.GetCourse(c, []int{req.Id}, "")
 	if errGetById != nil && gorm.IsRecordNotFoundError(errGetById) {
 		return response.BuildDataNotFoundResponseWithMessage("updated failed, id might not be found")
 	} else if errGetById != nil {

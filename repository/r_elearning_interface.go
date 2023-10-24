@@ -10,7 +10,7 @@ import (
 
 type Repository interface {
 	Ping() string
-	GetCourse(c context.Context, id []int) ([]entity.Courses, error)
+	GetCourse(c context.Context, id []int, isFree string) ([]entity.Courses, error)
 	CreateCourse(c context.Context, req dto.ReqCreateCourse) error
 	UpdateCourse(c context.Context, req dto.ReqUpdateCourse) error
 	DeleteCourse(c context.Context, id []int) error

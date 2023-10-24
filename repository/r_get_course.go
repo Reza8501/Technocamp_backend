@@ -6,7 +6,7 @@ import (
 	"ta-elearning/model/entity"
 )
 
-func (r *repository) GetCourse(c context.Context, id []int) ([]entity.Courses, error) {
+func (r *repository) GetCourse(c context.Context, id []int, isFree string) ([]entity.Courses, error) {
 
 	var data []entity.Courses
 
@@ -15,6 +15,10 @@ func (r *repository) GetCourse(c context.Context, id []int) ([]entity.Courses, e
 
 	if len(id) > 0 {
 		db = db.Where("id IN (?)", id)
+	}
+
+	if isFree != "" && isFree != "*" {
+		db = db.Where("is_free = ?", isFree)
 	}
 
 	err := db.Scan(&data).Error

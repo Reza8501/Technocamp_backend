@@ -1,7 +1,8 @@
 package dto
 
 type ReqCourseById struct {
-	ID []int `json:"id" validate:"omitempty"`
+	ID     []int  `json:"id" validate:"omitempty"`
+	IsFree string `json:"isFree" validate:"omitempty"`
 }
 
 type ReqDeleteCourseById struct {

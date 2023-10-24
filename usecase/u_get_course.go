@@ -11,7 +11,7 @@ import (
 
 func (u *usecase) GetCourse(c context.Context, req dto.ReqCourseById) *response.ResponseContainer {
 
-	resultCourse, err := u.Repo.GetCourse(c, req.ID)
+	resultCourse, err := u.Repo.GetCourse(c, req.ID, req.IsFree)
 	if err != nil && err.Error() == config.ErrRecordNotFound.Error() {
 		return response.BuildDataNotFoundResponse()
 	} else if err != nil {

@@ -14,7 +14,7 @@ create table if not exists users (
 );
 
 create table if not exists courses (
-  id int not null,
+  id int not null auto_increment,
   course_title varchar(255),
   course_image text,
   course_content text,
