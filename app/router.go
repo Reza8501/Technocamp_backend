@@ -49,6 +49,9 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	transaction.Use(middleware.MiddlewareAuth())
 	{
 		transaction.POST("/", d.Transaction)
+		transaction.POST("/manual", d.GetManualTransaction)
+		transaction.POST("/client", d.GetClientTransaction)
+		transaction.POST("/approve", d.ApproveTransaction)
 	}
 
 	router.NoRoute(d.NoRoute)
