@@ -28,16 +28,21 @@ func (repository *repository) UpsertTransaction(c context.Context, userId string
 	request.UpdatedAt = time.Now()
 	request.GenerateTransactionCode()
 
-	err := repository.mysqlConn.
-		Create(&request).Error
+	trx := repository.mysqlConn
+	trx.Begin()
+
+	err := trx.Create(&request).Error
 	if err != nil {
+		trx.Rollback()
 		return err
 	}
 
-	errDelete := repository.mysqlConn.Delete(&entity.UserCart{}, "user_id = ?", userId).Error
+	errDelete := trx.Delete(&entity.UserCart{}, "user_id = ?", userId).Error
 	if errDelete != nil {
+		trx.Rollback()
 		return errDelete
 	}
+	trx.Commit()
 
 	return nil
 }

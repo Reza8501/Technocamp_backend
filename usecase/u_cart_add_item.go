@@ -5,13 +5,15 @@ import (
 	"ta-elearning/model/dto"
 	"ta-elearning/model/dto/response"
 	"ta-elearning/model/entity"
+
+	"github.com/jinzhu/gorm"
 )
 
 func (u *usecase) CartAddItem(c context.Context, req dto.RequestCartItem, userId string) *response.ResponseContainer {
 	var userCart *entity.UserCart
 	var errUserCart, errCreateUser error
 	userCart, errUserCart = u.Repo.GetUserCartByUserId(c, userId)
-	if errUserCart != nil {
+	if errUserCart != nil && !gorm.IsRecordNotFoundError(errUserCart) {
 		return response.BuildInternalErrorResponse(response.ERROR_CODE_DATABASE_ERROR, response.RESPONSE_CODE_INTERNAL_ERROR, "Error getting cart", errUserCart.Error())
 	}
 
