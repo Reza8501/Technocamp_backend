@@ -17,6 +17,7 @@ type Usecase interface {
 	RegisterUser(c context.Context, req dto.RequestRegisterUser) *response.ResponseContainer
 	RegisterVerification(c context.Context, email string) *response.ResponseContainer
 	CartAddItem(c context.Context, req dto.RequestCartItem, userId string) *response.ResponseContainer
+	Transaction(c context.Context, req dto.RequestTransaction, userId string) *response.ResponseContainer
 }
 
 type usecase struct {

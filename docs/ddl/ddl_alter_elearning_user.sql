@@ -4,3 +4,6 @@ ADD COLUMN status_verification boolean default false;
 ADD COLUMN created_at timestamp;
 ADD COLUMN updated_at timestamp;
 ADD COLUMN deleted_at timestamp default null;
+
+ALTER TABLE ta.courses
+ADD COLUMN price int(255)

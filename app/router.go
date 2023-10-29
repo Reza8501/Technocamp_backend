@@ -44,6 +44,13 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 		cart.POST("/add-item", d.CartAddItem)
 	}
 
+	// transaction segment
+	transaction := router.Group("/transaction")
+	transaction.Use(middleware.MiddlewareAuth())
+	{
+		transaction.POST("/", d.Transaction)
+	}
+
 	router.NoRoute(d.NoRoute)
 
 	return router

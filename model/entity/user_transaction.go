@@ -1,6 +1,10 @@
 package entity
 
-import "time"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 type UserTransaction struct {
 	Id                  string    `json:"id" gorm:"column:id"`
@@ -13,4 +17,25 @@ type UserTransaction struct {
 	TransactionStatus   string    `json:"transactionStatus" gorm:"column:transaction_status"`
 	CreatedAt           time.Time `json:"createdAt" gorm:"column:created_at"`
 	UpdatedAt           time.Time `json:"updatedAt" gorm:"column:updated_at"`
+}
+
+const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const codeLength = 4
+
+func randomString(length int) string {
+	b := make([]byte, length)
+	for i := range b {
+		b[i] = charset[rand.Intn(len(charset))]
+	}
+	return string(b)
+}
+
+func (u *UserTransaction) GenerateTransactionCode() {
+	rand.Seed(time.Now().UnixNano())
+
+	randomStr := randomString(codeLength)
+	timestamp := time.Now().Unix()
+
+	transactionCode := fmt.Sprintf("%s#%s", randomStr, fmt.Sprintf("%d", timestamp)[5:])
+	u.TransactionCode = transactionCode
 }

@@ -6,7 +6,7 @@ import (
 	"ta-elearning/model/entity"
 )
 
-func (r *repository) GetCourse(c context.Context, id []int, isFree string) ([]entity.Courses, error) {
+func (r *repository) GetCourse(c context.Context, id []int, isFree string, IsActive, HasBuyer bool) ([]entity.Courses, error) {
 
 	var data []entity.Courses
 

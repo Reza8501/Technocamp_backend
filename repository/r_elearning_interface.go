@@ -10,7 +10,7 @@ import (
 
 type Repository interface {
 	Ping() string
-	GetCourse(c context.Context, id []int, isFree string) ([]entity.Courses, error)
+	GetCourse(c context.Context, id []int, isFree string, IsActive, HasBuyer bool) ([]entity.Courses, error)
 	CreateCourse(c context.Context, req dto.ReqCreateCourse) error
 	UpdateCourse(c context.Context, req dto.ReqUpdateCourse) error
 	DeleteCourse(c context.Context, id []int) error
@@ -20,6 +20,8 @@ type Repository interface {
 	CreateUserCart(c context.Context, userId string) (*entity.UserCart, error)
 	GetUserCartByUserId(c context.Context, userId string) (*entity.UserCart, error)
 	CreateCartItem(c context.Context, cartId string, courseId int) error
+	GetTotalPrice(c context.Context, cartId string) (*dto.TotalCoursePrice, error)
+	UpsertTransaction(c context.Context, userId string, cartId string, total int) error
 }
 
 type repository struct {

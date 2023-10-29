@@ -17,6 +17,7 @@ type Delivery interface {
 	RegisterUser(c *gin.Context)
 	RegisterVerification(c *gin.Context)
 	CartAddItem(c *gin.Context)
+	Transaction(c *gin.Context)
 }
 
 type delivery struct {
