@@ -22,6 +22,9 @@ type Repository interface {
 	CreateCartItem(c context.Context, cartId string, courseId int) error
 	GetTotalPrice(c context.Context, cartId string) (*dto.TotalCoursePrice, error)
 	UpsertTransaction(c context.Context, userId string, cartId string, total int) error
+	GetManualTransaction(c context.Context) ([]entity.UserTransaction, error)
+	GetClientTransaction(c context.Context, userId string) ([]entity.UserTransaction, error)
+	ApproveTransaction(c context.Context, transactionCode string) error
 }
 
 type repository struct {

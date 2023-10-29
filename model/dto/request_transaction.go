@@ -7,3 +7,7 @@ type RequestTransaction struct {
 type TotalCoursePrice struct {
 	Total int `json:"total" gorm:"total"`
 }
+
+type ApproveTransaction struct {
+	TransactionCode string `json:"transactionCode" validate:"required"`
+}
