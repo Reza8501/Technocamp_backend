@@ -30,6 +30,7 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 		course.POST("/create", d.CreateCourse)
 		course.POST("/update", d.UpdateCourse)
 		course.POST("/delete", d.DeleteCourse)
+		course.POST("/client/get", d.GetCourseClient)
 	}
 
 	// users segment

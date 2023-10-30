@@ -8,6 +8,7 @@ import (
 	"ta-elearning/model/dto/response"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 func (d *delivery) DeleteCourse(c *gin.Context) {
@@ -23,6 +24,12 @@ func (d *delivery) DeleteCourse(c *gin.Context) {
 	} else if errBind != nil {
 		errResp := response.BuildBadRequestResponse(response.ERROR_CODE_INVALID_DATA_TYPE, response.RESPONSE_CODE_BAD_REQUEST, response.RESPONSE_MESSAGE_INVALID_DATA_TYPE, errBind.Error())
 		c.JSON(http.StatusBadRequest, errResp)
+		return
+	}
+
+	userInfo := c.MustGet("userInfo").(jwt.MapClaims)
+	if userInfo["role"].(string) != "admin" {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, response.BuildUnauthorizedResponse("Invalid Authentication", "only admin can access this api"))
 		return
 	}
 

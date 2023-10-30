@@ -10,13 +10,9 @@ func (r *repository) GetClientTransaction(c context.Context, userId string) ([]e
 
 	var data []entity.UserTransaction
 
-	db := r.mysqlConn.
-		Model(&entity.UserTransaction{}).Where("user_id = ?", userId)
-
-	err := db.Scan(&data).Error
-
-	if err != nil {
-		return nil, err
+	db := r.mysqlConn.Preload("User").Preload("Item").Preload("Item.Course").Where("user_id = ?", userId).Find(&data)
+	if db.Error != nil {
+		return nil, db.Error
 	}
 
 	if len(data) == 0 {

@@ -21,6 +21,8 @@ func (r *repository) GetCourse(c context.Context, id []int, isFree string, IsAct
 		db = db.Where("is_free = ?", isFree)
 	}
 
+	db = db.Where("is_active = ?", IsActive)
+
 	err := db.Scan(&data).Error
 
 	if err != nil {

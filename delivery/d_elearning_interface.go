@@ -21,6 +21,7 @@ type Delivery interface {
 	GetManualTransaction(c *gin.Context)
 	GetClientTransaction(c *gin.Context)
 	ApproveTransaction(c *gin.Context)
+	GetCourseClient(c *gin.Context)
 }
 
 type delivery struct {
