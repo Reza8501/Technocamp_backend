@@ -18,6 +18,7 @@ type UserTransaction struct {
 	CreatedAt           time.Time   `json:"createdAt" gorm:"column:created_at"`
 	UpdatedAt           time.Time   `json:"updatedAt" gorm:"column:updated_at"`
 	User                UsersOutput `json:"user" gorm:"foreignkey:UserId"`
+	Item                []CartItem  `json:"item" gorm:"foreignkey:CartId;association_foreignkey:CartId"`
 }
 
 const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

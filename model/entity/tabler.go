@@ -35,6 +35,9 @@ func (Roles) TableName() string {
 func (Courses) TableName() string {
 	return TABLE_COURSES
 }
+func (CoursesOutput) TableName() string {
+	return TABLE_COURSES
+}
 func (CartItem) TableName() string {
 	return TABLE_CART_ITEM
 }
