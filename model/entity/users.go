@@ -1,6 +1,8 @@
 package entity
 
-import "time"
+import (
+	"time"
+)
 
 type Users struct {
 	Id                 string    `json:"id" gorm:"column:id"`
@@ -13,4 +15,11 @@ type Users struct {
 	CreatedAt          time.Time `json:"createdAt" gorm:"column:created_at"`
 	UpdatedAt          time.Time `json:"updatedAt" gorm:"column:updated_at"`
 	DeletedAt          time.Time `json:"deletedAt" gorm:"column:deleted_at"`
+}
+
+type UsersOutput struct {
+	Id       string `json:"id" gorm:"column:id"`
+	Username string `json:"username" gorm:"column:username"`
+	Email    string `json:"email" gorm:"column:email"`
+	FullName string `json:"fullName" gorm:"column:full_name"`
 }

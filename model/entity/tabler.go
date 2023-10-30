@@ -17,6 +17,9 @@ type Tabler interface {
 func (Users) TableName() string {
 	return TABLE_USERS
 }
+func (UsersOutput) TableName() string {
+	return TABLE_USERS
+}
 func (UserTransaction) TableName() string {
 	return TABLE_USER_TRANSACTION
 }

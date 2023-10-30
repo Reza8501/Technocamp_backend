@@ -9,15 +9,9 @@ import (
 func (r *repository) GetManualTransaction(c context.Context) ([]entity.UserTransaction, error) {
 
 	var data []entity.UserTransaction
-
-	db := r.mysqlConn.
-		Model(&entity.UserTransaction{}).
-		Where("transaction_method = ?", "manual")
-
-	err := db.Scan(&data).Error
-
-	if err != nil {
-		return nil, err
+	db := r.mysqlConn.Preload("User").Find(&data)
+	if db.Error != nil {
+		return nil, db.Error
 	}
 
 	if len(data) == 0 {
