@@ -3,8 +3,8 @@ package dto
 type ReqCourseById struct {
 	ID       []int  `json:"id" validate:"omitempty"`
 	IsFree   string `json:"isFree" validate:"omitempty"`
-	IsActive bool   `json:"is_active" validate:"omitempty"`
-	HasBuyer bool   `json:"has_buyer" validate:"omitempty"`
+	IsActive bool   `json:"isActive" validate:"omitempty"`
+	HasBuyer bool   `json:"hasBuyer" validate:"omitempty"`
 }
 
 type ReqDeleteCourseById struct {
