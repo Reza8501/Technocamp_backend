@@ -11,7 +11,8 @@ func (r *repository) GetManualTransaction(c context.Context) ([]entity.UserTrans
 	var data []entity.UserTransaction
 
 	db := r.mysqlConn.
-		Model(&entity.UserTransaction{}).Where("transaction_method = ?", "manual")
+		Model(&entity.UserTransaction{}).
+		Where("transaction_method = ?", "manual")
 
 	err := db.Scan(&data).Error
 

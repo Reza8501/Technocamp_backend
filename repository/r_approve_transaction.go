@@ -9,7 +9,7 @@ func (r *repository) ApproveTransaction(c context.Context, transactionCode strin
 	errDb := r.mysqlConn.
 		Model(&entity.UserTransaction{}).
 		Where("transaction_code = ?", transactionCode).
-		Update("transaction_status = ?", "success").
+		UpdateColumn("transaction_status", "success").
 		Error
 
 	if errDb != nil {
