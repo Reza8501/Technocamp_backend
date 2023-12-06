@@ -17,6 +17,7 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	d := delivery.NewDelivery(u)
 
 	router := gin.Default()
+	router.Use(CORSMiddleware())
 
 	// authentication segment
 	auth := router.Group("/auth")
@@ -58,4 +59,20 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	router.NoRoute(d.NoRoute)
 
 	return router
+}
+
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
 }
