@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"context"
-	"log"
 	"ta-elearning/config"
 	"ta-elearning/model/dto"
 	"ta-elearning/model/dto/response"
@@ -11,9 +10,6 @@ import (
 )
 
 func (u *usecase) GetCourse(c context.Context, req dto.ReqCourseById) *response.ResponseContainer {
-
-	log.Println(req)
-
 	resultCourse, err := u.Repo.GetCourse(c, req.ID, req.IsFree, req.IsActive, req.HasBuyer)
 	if err != nil && err.Error() == config.ErrRecordNotFound.Error() {
 		return response.BuildDataNotFoundResponse()

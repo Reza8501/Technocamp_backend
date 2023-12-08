@@ -3,7 +3,7 @@ package dto
 type ReqCourseById struct {
 	ID       []int  `json:"id" validate:"omitempty"`
 	IsFree   string `json:"isFree" validate:"omitempty"`
-	IsActive bool   `json:"isActive" validate:"omitempty"`
+	IsActive string `json:"isActive" validate:"omitempty"`
 	HasBuyer bool   `json:"hasBuyer" validate:"omitempty"`
 }
 
@@ -19,6 +19,7 @@ type ReqUpdateCourse struct {
 	IsFree        bool   `json:"isFree" gorm:"column:is_free"`
 	IsActive      bool   `json:"isActive" gorm:"column:is_active"`
 	HasBuyer      bool   `json:"hasBuyer" gorm:"column:has_buyer"`
+	Price         int    `json:"price" gorm:"column:price"`
 }
 
 type ReqCreateCourse struct {
@@ -29,4 +30,5 @@ type ReqCreateCourse struct {
 	IsFree        bool   `json:"isFree" gorm:"column:is_free"`
 	IsActive      bool   `json:"isActive" gorm:"column:is_active"`
 	HasBuyer      bool   `json:"hasBuyer" gorm:"column:has_buyer"`
+	Price         int    `json:"price" gorm:"column:price"`
 }

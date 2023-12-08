@@ -6,3 +6,8 @@ type CartItem struct {
 	CourseId int           `json:"courseId" gorm:"column:course_id"`
 	Course   CoursesOutput `json:"course" gorm:"foreignkey:CourseId"`
 }
+
+type ResponseCartItem struct {
+	CartId string    `json:"cartId"`
+	Course []Courses `json:"item"`
+}

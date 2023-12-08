@@ -33,6 +33,7 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 		course.POST("/delete", d.DeleteCourse)
 		course.POST("/client/get", d.GetCourseClient)
 	}
+	router.POST("/course/publish", d.GetCoursePublish)
 
 	// users segment
 	users := router.Group("/users")
@@ -43,17 +44,22 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 	cart := router.Group("/cart")
 	cart.Use(middleware.MiddlewareAuth())
 	{
+		cart.POST("/item", d.GetCartItem)
+		cart.POST("/item/delete", d.DeleteCartItem)
 		cart.POST("/add-item", d.CartAddItem)
 	}
 
 	// transaction segment
 	transaction := router.Group("/transaction")
+	transaction.Use(CORSMiddleware())
 	transaction.Use(middleware.MiddlewareAuth())
 	{
 		transaction.POST("/", d.Transaction)
+		transaction.POST("/proof", d.ProofTransaction)
 		transaction.POST("/manual", d.GetManualTransaction)
 		transaction.POST("/client", d.GetClientTransaction)
 		transaction.POST("/approve", d.ApproveTransaction)
+		transaction.POST("/reject", d.RejectTransaction)
 	}
 
 	router.NoRoute(d.NoRoute)

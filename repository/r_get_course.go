@@ -6,12 +6,12 @@ import (
 	"ta-elearning/model/entity"
 )
 
-func (r *repository) GetCourse(c context.Context, id []int, isFree string, IsActive, HasBuyer bool) ([]entity.Courses, error) {
+func (r *repository) GetCourse(c context.Context, id []int, isFree string, IsActive string, HasBuyer bool) ([]entity.Courses, error) {
 
 	var data []entity.Courses
 
 	db := r.mysqlConn.
-		Model(&entity.Courses{})
+		Model(&entity.Courses{}).Preload("Buyer")
 
 	if len(id) > 0 {
 		db = db.Where("id IN (?)", id)
@@ -21,9 +21,15 @@ func (r *repository) GetCourse(c context.Context, id []int, isFree string, IsAct
 		db = db.Where("is_free = ?", isFree)
 	}
 
-	db = db.Where("is_active = ?", IsActive)
+	if IsActive != "" && IsActive != "*" {
+		if IsActive == "1" {
+			db = db.Where("is_active = ?", true)
+		} else {
+			db = db.Where("is_active = ?", false)
+		}
+	}
 
-	err := db.Scan(&data).Error
+	err := db.Find(&data).Error
 
 	if err != nil {
 		return nil, err

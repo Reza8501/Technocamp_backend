@@ -11,3 +11,12 @@ type TotalCoursePrice struct {
 type ApproveTransaction struct {
 	TransactionCode string `json:"transactionCode" validate:"required"`
 }
+
+type RejectTransaction struct {
+	TransactionCode string `json:"transactionCode" validate:"required"`
+}
+
+type RequestProofTransaction struct {
+	TransactionCode string `json:"transactionCode" validate:"required"`
+	Proof           string `json:"proof" validate:"required"`
+}

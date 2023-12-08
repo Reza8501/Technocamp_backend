@@ -9,7 +9,7 @@ import (
 func (r *repository) ApproveTransaction(c context.Context, transactionCode string) error {
 
 	trx := r.mysqlConn
-	trx.Begin()
+	// trx.Begin()
 
 	errUpdate := trx.
 		Model(&entity.UserTransaction{}).
@@ -17,7 +17,7 @@ func (r *repository) ApproveTransaction(c context.Context, transactionCode strin
 		UpdateColumn("transaction_status", "success").
 		Error
 	if errUpdate != nil {
-		trx.Rollback()
+		// trx.Rollback()
 		return errUpdate
 	}
 
@@ -25,12 +25,12 @@ func (r *repository) ApproveTransaction(c context.Context, transactionCode strin
 
 	errGetItem := trx.Preload("User").Preload("Item").Preload("Item.Course").Where("transaction_code = ?", transactionCode).Find(&data).Error
 	if errGetItem != nil {
-		trx.Rollback()
+		// trx.Rollback()
 		return errGetItem
 	}
 
 	if len(data) == 0 {
-		trx.Rollback()
+		// trx.Rollback()
 		return config.ErrRecordNotFound
 	}
 
@@ -42,13 +42,13 @@ func (r *repository) ApproveTransaction(c context.Context, transactionCode strin
 				CourseId: j.CourseId,
 			}).Error
 			if errInsertItem != nil {
-				trx.Rollback()
+				// trx.Rollback()
 				return errInsertItem
 			}
 		}
 	}
 
-	trx.Commit()
+	// trx.Commit()
 
 	return nil
 }

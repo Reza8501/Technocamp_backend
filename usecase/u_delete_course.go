@@ -14,7 +14,7 @@ func (u *usecase) DeleteCourse(c context.Context, req dto.ReqDeleteCourseById) *
 		return response.BuildDataNotFoundResponse()
 	}
 
-	course, errGetById := u.Repo.GetCourse(c, req.ID, "", true, true)
+	course, errGetById := u.Repo.GetCourse(c, req.ID, "", "*", true)
 	if errGetById != nil && gorm.IsRecordNotFoundError(errGetById) {
 		return response.BuildDataNotFoundResponseWithMessage("updated failed, id might not be found")
 	} else if errGetById != nil {

@@ -17,11 +17,16 @@ type Delivery interface {
 	RegisterUser(c *gin.Context)
 	RegisterVerification(c *gin.Context)
 	CartAddItem(c *gin.Context)
+	GetCartItem(c *gin.Context)
+	DeleteCartItem(c *gin.Context)
 	Transaction(c *gin.Context)
 	GetManualTransaction(c *gin.Context)
 	GetClientTransaction(c *gin.Context)
 	ApproveTransaction(c *gin.Context)
 	GetCourseClient(c *gin.Context)
+	ProofTransaction(c *gin.Context)
+	RejectTransaction(c *gin.Context)
+	GetCoursePublish(c *gin.Context)
 }
 
 type delivery struct {

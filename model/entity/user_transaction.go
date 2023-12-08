@@ -15,6 +15,7 @@ type UserTransaction struct {
 	TransactionTotal    float64     `json:"transactionTotal" gorm:"column:transaction_total"`
 	TransactionMethod   string      `json:"transactionMethod" gorm:"column:transaction_method"`
 	TransactionStatus   string      `json:"transactionStatus" gorm:"column:transaction_status"`
+	TransactionProof    string      `json:"transactionProof" gorm:"column:transaction_proof"`
 	CreatedAt           time.Time   `json:"createdAt" gorm:"column:created_at"`
 	UpdatedAt           time.Time   `json:"updatedAt" gorm:"column:updated_at"`
 	User                UsersOutput `json:"user" gorm:"foreignkey:UserId"`

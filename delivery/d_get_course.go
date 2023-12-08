@@ -1,7 +1,6 @@
 package delivery
 
 import (
-	"log"
 	"net/http"
 	"ta-elearning/model/dto"
 	"ta-elearning/model/dto/response"
@@ -14,7 +13,6 @@ func (d *delivery) GetCourse(c *gin.Context) {
 
 	var req dto.ReqCourseById
 	errBind := c.ShouldBindJSON(&req)
-	log.Print(req)
 
 	if errBind != nil {
 		errResp := response.BuildBadRequestResponse(response.ERROR_CODE_INVALID_DATA_TYPE, response.RESPONSE_CODE_BAD_REQUEST, response.RESPONSE_MESSAGE_INVALID_DATA_TYPE, errBind.Error())

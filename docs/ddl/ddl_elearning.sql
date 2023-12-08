@@ -21,8 +21,8 @@ create table if not exists users (
 create table if not exists courses (
   id int not null auto_increment,
   course_title varchar(255),
-  course_image text,
-  course_content text,
+  course_image longtext,
+  course_content longtext,
   is_free boolean default true,
   is_active boolean default true,
   has_buyer boolean default false,
@@ -64,6 +64,7 @@ create table if not exists user_transaction (
   transaction_total decimal(19,4) not null,
   transaction_method varchar(50) not null,
   transaction_status varchar(50) not null,
+  transaction_proof longtext,
   created_at timestamp not null,
   updated_at timestamp not null,
   constraint pk_user_transaction primary key (id),

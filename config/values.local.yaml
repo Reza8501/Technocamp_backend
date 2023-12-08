@@ -13,7 +13,7 @@ env:
   - name: MYSQL_USER
     value: "root"
   - name: MYSQL_PASS
-    value: "root"
+    value: ""
   - name: MYSQL_SCHEMA
     value: "ta"
 

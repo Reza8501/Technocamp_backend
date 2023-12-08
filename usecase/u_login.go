@@ -55,6 +55,8 @@ func (u *usecase) Login(c context.Context, request dto.RequestLogin) *response.R
 
 	return response.BuildSuccessResponse(&dto.ResponseJwt{
 		Token: signedToken,
+		Role:  user.Role,
+		Name:  user.FullName,
 	})
 }
 

@@ -29,20 +29,20 @@ func (repository *repository) UpsertTransaction(c context.Context, userId string
 	request.GenerateTransactionCode()
 
 	trx := repository.mysqlConn
-	trx.Begin()
+	// trx.Begin()
 
 	err := trx.Create(&request).Error
 	if err != nil {
-		trx.Rollback()
+		// trx.Rollback()
 		return err
 	}
 
 	errDelete := trx.Delete(&entity.UserCart{}, "user_id = ?", userId).Error
 	if errDelete != nil {
-		trx.Rollback()
+		// trx.Rollback()
 		return errDelete
 	}
-	trx.Commit()
+	// trx.Commit()
 
 	return nil
 }

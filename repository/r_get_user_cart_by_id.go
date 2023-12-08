@@ -15,5 +15,5 @@ func (repository *repository) GetUserCartByUserId(c context.Context, userId stri
 		return nil, err
 	}
 
-	return &data, err
+	return &data, nil
 }

@@ -19,4 +19,6 @@ type JwtClaims struct {
 
 type ResponseJwt struct {
 	Token string `json:"token"`
+	Role  string `json:"role"`
+	Name  string `json:"name"`
 }

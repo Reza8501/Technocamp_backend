@@ -6,10 +6,9 @@ import (
 	"ta-elearning/model/dto/response"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v4"
 )
 
-func (d *delivery) GetCourseClient(c *gin.Context) {
+func (d *delivery) GetCoursePublish(c *gin.Context) {
 
 	var req dto.ReqCourseById
 	errBind := c.ShouldBindJSON(&req)
@@ -17,12 +16,6 @@ func (d *delivery) GetCourseClient(c *gin.Context) {
 	if errBind != nil {
 		errResp := response.BuildBadRequestResponse(response.ERROR_CODE_INVALID_DATA_TYPE, response.RESPONSE_CODE_BAD_REQUEST, response.RESPONSE_MESSAGE_INVALID_DATA_TYPE, errBind.Error())
 		c.JSON(http.StatusBadRequest, errResp)
-		return
-	}
-
-	userInfo := c.MustGet("userInfo").(jwt.MapClaims)
-	if userInfo["role"].(string) != "client" {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, response.BuildUnauthorizedResponse("Invalid Authentication", "only client can access this api"))
 		return
 	}
 

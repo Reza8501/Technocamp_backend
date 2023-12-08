@@ -17,10 +17,14 @@ type Usecase interface {
 	RegisterUser(c context.Context, req dto.RequestRegisterUser) *response.ResponseContainer
 	RegisterVerification(c context.Context, email string) *response.ResponseContainer
 	CartAddItem(c context.Context, req dto.RequestCartItem, userId string) *response.ResponseContainer
+	GetCartItem(c context.Context, userId string) *response.ResponseContainer
+	DeleteCartItem(c context.Context, request dto.RequestDeleteCartItem, userId string) *response.ResponseContainer
 	Transaction(c context.Context, req dto.RequestTransaction, userId string) *response.ResponseContainer
 	GetManualTransaction(c context.Context) *response.ResponseContainer
 	GetClientTransaction(c context.Context, userId string) *response.ResponseContainer
 	ApproveTransaction(c context.Context, request dto.ApproveTransaction) *response.ResponseContainer
+	RejectTransaction(c context.Context, request dto.RejectTransaction) *response.ResponseContainer
+	ProofTransaction(c context.Context, request dto.RequestProofTransaction, userId string) *response.ResponseContainer
 }
 
 type usecase struct {
